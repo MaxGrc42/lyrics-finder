@@ -9,6 +9,6 @@ export default defineNuxtConfig({
     geniusApiKey: process.env.GENIUS_API_KEY
   },
   nitro: {
-    preset: 'vercel'
+    preset: 'vercel-edge'
   }
 })
