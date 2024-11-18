@@ -73,6 +73,6 @@ function findSongs () {
 .find {
   margin-top: 2%;
   height: 50px;
-  width: 50%;
+  width: 20%;
 }
 </style>
