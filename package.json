@@ -1,7 +1,7 @@
 {
   "name": "nuxt-app",
   "private": true,
-  "type": "commonjs",
+  "type": "module",
   "scripts": {
     "build": "nuxt build",
     "dev": "nuxt dev",
@@ -13,7 +13,6 @@
     "@nuxt/ui": "^2.19.2",
     "genius-lyrics-api": "^3.2.1",
     "nuxt": "^3.14.159",
-    "superagent": "latest",
     "vue": "latest",
     "vue-router": "latest"
   }
