@@ -15,6 +15,7 @@
     "nuxt": "^3.14.159",
     "spotify-web-api-node": "^5.0.2",
     "vue": "latest",
-    "vue-router": "latest"
+    "vue-router": "latest",
+    "formidable": "latest"
   }
 }
