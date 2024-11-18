@@ -7,22 +7,14 @@
     "dev": "nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
-    "postinstall": "nuxt prepare",
-    "preinstall": "npx npm-force-resolutions"
+    "postinstall": "nuxt prepare"
   },
   "dependencies": {
     "@nuxt/ui": "^2.19.2",
-    "formidable": "latest",
     "genius-lyrics-api": "^3.2.1",
     "nuxt": "^3.14.159",
-    "spotify-web-api-node": "^5.0.2",
+    "superagent": "latest",
     "vue": "latest",
     "vue-router": "latest"
-  },
-  "resolutions": {
-    "formidable": "^3.5.2"
-  },
-  "devDependencies": {
-    "npm-force-resolutions": "^0.0.10"
   }
 }
