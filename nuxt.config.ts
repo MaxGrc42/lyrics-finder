@@ -7,5 +7,8 @@ export default defineNuxtConfig({
     spotifyClientId: process.env.SPOTIFY_CLIENT_ID,
     spotifyClientSecret: process.env.SPOTIFY_CLIENT_SECRET,
     geniusApiKey: process.env.GENIUS_API_KEY
+  },
+  nitro: {
+    preset: 'vercel'
   }
 })
