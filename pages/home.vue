@@ -2,6 +2,25 @@
 const playlistId = ref('')
 const router = useRouter()
 const isOpen = ref(false)
+const author = ref('')
+const title = ref('')
+const items = [
+  {
+    label: 'Playlist',
+    icon: 'i-heroicons-information-circle'
+  },
+  {
+    label: 'Titre et auteur',
+    icon: 'i-heroicons-arrow-down-tray'
+  }
+]
+
+const item = ref(0)
+function onChange (index) {
+  item.value = index
+  console.log(item.value)
+}
+
 function isValidPlaylistId (id) {
   const base62Regex = /^[0-9a-zA-Z]+$/
   return base62Regex.test(id)
@@ -18,13 +37,26 @@ function findSongs () {
     name: 'songs'
   })
 }
+
+function findSong () {
+  localStorage.setItem(
+    'song',
+    JSON.stringify({ title: title.value, artist: author.value })
+  )
+  router.push({
+    name: 'lyrics'
+  })
+}
 </script>
 <template>
   <h1 class="title">Lyrics finder</h1>
   <p class="description">
     Trouve les paroles des chansons de ta playlist Spotify !
   </p>
-  <div class="input-area">
+  <div class="tabs">
+    <UTabs :items="items" @change="onChange" />
+  </div>
+  <div class="input-area" v-if="item === 0">
     <UInput
       class="input"
       placeholder="Playlist ID"
@@ -43,6 +75,27 @@ function findSongs () {
     </UButton>
     <UButton class="find" @click="findSongs()" icon="i-heroicons-musical-note">
       Trouver les chansons
+    </UButton>
+  </div>
+  <div class="input-area" v-if="item === 1">
+    <UInput
+      class="input"
+      placeholder="Titre de la chanson"
+      v-model="title"
+      type="search"
+      size="xl"
+      icon="i-heroicons-magnifying-glass"
+    ></UInput>
+    <UInput
+      class="input"
+      placeholder="Artiste de la chanson"
+      v-model="author"
+      type="search"
+      size="xl"
+      icon="i-heroicons-magnifying-glass"
+    ></UInput>
+    <UButton class="find" @click="findSong()" icon="i-heroicons-musical-note">
+      Trouver la chanson
     </UButton>
   </div>
   <UModal v-model="isOpen" :ui="{ width: 'md:max-w-4xl' }">
@@ -81,12 +134,19 @@ function findSongs () {
   text-align: center;
 }
 
+.tabs {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 2%;
+}
+
 .input-area {
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  margin: 10% 4% 4% 4%;
+  margin: 5% 4% 4% 4%;
 }
 
 .input {
