@@ -7,11 +7,11 @@ const title = ref('')
 const items = [
   {
     label: 'Playlist',
-    icon: 'i-heroicons-information-circle'
+    icon: 'i-heroicons-queue-list'
   },
   {
     label: 'Titre et auteur',
-    icon: 'i-heroicons-arrow-down-tray'
+    icon: 'i-heroicons-musical-note'
   }
 ]
 
