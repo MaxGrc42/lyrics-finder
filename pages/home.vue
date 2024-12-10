@@ -1,7 +1,7 @@
 <script setup>
 const playlistId = ref('')
 const router = useRouter()
-
+const isOpen = ref(false)
 function isValidPlaylistId (id) {
   const base62Regex = /^[0-9a-zA-Z]+$/
   return base62Regex.test(id)
@@ -22,7 +22,7 @@ function findSongs () {
 <template>
   <h1 class="title">Lyrics finder</h1>
   <p class="description">
-    Find the lyrics of your favorites songs in your Spotify playlists !
+    Trouve les paroles des chansons de ta playlist Spotify !
   </p>
   <div class="input-area">
     <UInput
@@ -33,11 +33,39 @@ function findSongs () {
       size="xl"
       icon="i-heroicons-magnifying-glass"
     ></UInput>
-    <p class="infos">You need to enter the id of your Spotify playlist</p>
+    <p class="infos">Vous devez entrer l'ID de la playlist Spotify</p>
+    <UButton
+      color="gray"
+      icon="i-heroicons-question-mark-circle"
+      @click="isOpen = true"
+    >
+      Comment trouver l'ID de ma playlist ?
+    </UButton>
     <UButton class="find" @click="findSongs()" icon="i-heroicons-musical-note">
-      Find songs
+      Trouver les chansons
     </UButton>
   </div>
+  <UModal v-model="isOpen" :ui="{ width: 'md:max-w-4xl' }">
+    <UCard>
+      <template #header>
+        <div class="flex items-center justify-between">
+          <h3
+            class="text-base font-semibold leading-6 text-gray-900 dark:text-white"
+          >
+            Comment trouver l'ID de ma playlist ?
+          </h3>
+          <UButton
+            color="gray"
+            variant="ghost"
+            icon="i-heroicons-x-mark-20-solid"
+            class="-my-1"
+            @click="isOpen = false"
+          />
+        </div>
+      </template>
+      <TutorialModal />
+    </UCard>
+  </UModal>
 </template>
 <style>
 .title {

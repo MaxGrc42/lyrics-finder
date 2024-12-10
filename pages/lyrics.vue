@@ -66,7 +66,25 @@ onUnmounted(() => {
     </div>
   </UCard>
   <UModal v-model="showModal">
-    <SongExport :lyrics="lyrics" :title="song.title" />
+    <UCard>
+      <template #header>
+        <div class="flex items-center justify-between">
+          <h3
+            class="text-base font-semibold leading-6 text-gray-900 dark:text-white"
+          >
+            Export de la chanson
+          </h3>
+          <UButton
+            color="gray"
+            variant="ghost"
+            icon="i-heroicons-x-mark-20-solid"
+            class="-my-1"
+            @click="showModal = false"
+          />
+        </div>
+      </template>
+      <SongExport :lyrics="lyrics" :title="song.title" />
+    </UCard>
   </UModal>
 </template>
 <style scoped>

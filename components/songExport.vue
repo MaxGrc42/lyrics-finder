@@ -62,31 +62,21 @@ function exportSong (lyrics, title) {
 </script>
 <template>
   <p>{{ titlef }}</p>
-  <UCard class="modal">
-    <div class="options">
-      <p>Type d'export</p>
-      <USelect
-        class="select"
-        v-model="selectedExport"
-        :options="exportTypes"
-      ></USelect>
-    </div>
-    <div class="action">
-      <UButton class="export" @click="exportSong(lyrics, title)"
-        >Exporter</UButton
-      >
-    </div>
-  </UCard>
+  <div class="options">
+    <p>Type d'export</p>
+    <USelect
+      class="select"
+      v-model="selectedExport"
+      :options="exportTypes"
+    ></USelect>
+  </div>
+  <div class="action">
+    <UButton class="export" @click="exportSong(lyrics, title)"
+      >Exporter</UButton
+    >
+  </div>
 </template>
 <style scoped>
-.modal {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 2%;
-}
-
 .options {
   display: flex;
   align-items: center;
