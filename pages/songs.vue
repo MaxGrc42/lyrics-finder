@@ -5,8 +5,6 @@ const loading = ref(false)
 
 const songs = ref([])
 
-const route = useRoute()
-
 const router = useRouter()
 
 const columns = ref([
@@ -38,7 +36,10 @@ onMounted(() => {
 })
 </script>
 <template>
-  <h1>Chansons dans la playlist</h1>
+  <div class="top">
+    <BackButton />
+    <h1>Chansons dans la playlist</h1>
+  </div>
   <UCard class="card" title="Songs">
     <UTable :rows="songs" :columns="columns">
       <template #action-data="{ row }">
@@ -49,12 +50,18 @@ onMounted(() => {
   </UCard>
 </template>
 <style scoped>
+.top {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+}
 .card {
   margin: 1% 5% 0 5%;
 }
-h1 {
+.top h1 {
   font-size: 2.5em;
   margin-top: 2%;
+  margin-left: 2vw;
   text-align: center;
 }
 .table {

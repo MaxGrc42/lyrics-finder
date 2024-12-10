@@ -26,6 +26,7 @@ export async function getPlaylistSongs (playlistId, accessToken) {
   )
   const { items } = await result.json()
   return items.map(item => ({
+    id: item.track.id,
     title: item.track.name,
     artist: item.track.artists[0].name
   }))
