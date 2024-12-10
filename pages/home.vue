@@ -18,7 +18,6 @@ const items = [
 const item = ref(0)
 function onChange (index) {
   item.value = index
-  console.log(item.value)
 }
 
 function isValidPlaylistId (id) {
@@ -31,7 +30,6 @@ function findSongs () {
     alert('Invalid playlist ID. Please enter a valid base62 ID.')
     return
   }
-  console.log(playlistId.value)
   localStorage.setItem('playlistId', playlistId.value)
   router.push({
     name: 'songs'
@@ -120,7 +118,7 @@ function findSong () {
     </UCard>
   </UModal>
 </template>
-<style>
+<style scoped>
 .title {
   font-size: 2.5em;
   padding-top: 10%;
@@ -162,5 +160,21 @@ function findSong () {
   margin-top: 2%;
   height: 50px;
   width: 20%;
+}
+
+@media (orientation: portrait) {
+  .input {
+    width: 90%;
+    margin-bottom: 2%;
+  }
+
+  .find {
+    width: 90%;
+    margin-top: 5vh;
+  }
+
+  .description {
+    font-size: 1em;
+  }
 }
 </style>

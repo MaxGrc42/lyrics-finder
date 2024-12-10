@@ -9,11 +9,9 @@ const loading = ref(false)
 
 function fetchLyrics (song) {
   loading.value = true
-  console.log(song)
   fetch(`/api/lyrics?title=${song.title}&artist=${song.artist}`)
     .then(res => res.text())
     .then(data => {
-      console.log(data)
       lyrics.value = data
       loading.value = false
     })
@@ -130,7 +128,7 @@ onUnmounted(() => {
   flex-direction: column; /* Ensure content stacks vertically */
   justify-content: flex-start; /* Align content to the top */
   align-items: center;
-  max-height: 600px; /* Adjust the height as needed */
+  max-height: 80vh; /* Adjust the height as needed */
   overflow-y: auto; /* Enable vertical scrolling */
   width: 90%;
 }

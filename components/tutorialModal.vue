@@ -6,10 +6,6 @@ const texts = ref([
   'Sélectionner la partie de l\'URL après "playlist/"'
 ])
 const item = ref(0)
-
-function displayText () {
-  console.log(pictures[item.value])
-}
 </script>
 <template>
   <UCarousel

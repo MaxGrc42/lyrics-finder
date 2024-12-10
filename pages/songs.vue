@@ -31,14 +31,28 @@ function getLyrics (song) {
     name: 'lyrics'
   })
 }
+
+function disableScroll () {
+  document.body.style.overflow = 'hidden'
+}
+
+function enableScroll () {
+  document.body.style.overflow = ''
+}
+
 onMounted(() => {
+  disableScroll()
   fetchSongs()
+})
+
+onUnmounted(() => {
+  enableScroll()
 })
 </script>
 <template>
   <div class="top">
     <BackButton />
-    <h1>Chansons dans la playlist</h1>
+    <h1>Chansons</h1>
   </div>
   <UCard class="card" title="Songs">
     <UTable :rows="songs" :columns="columns">
@@ -48,6 +62,9 @@ onMounted(() => {
       </template>
     </UTable>
   </UCard>
+  <div class="songs" v-for="song in songs">
+    <SongDisplay :title="song.title" :author="song.artist" />
+  </div>
 </template>
 <style scoped>
 .top {
@@ -57,6 +74,8 @@ onMounted(() => {
 }
 .card {
   margin: 1% 5% 0 5%;
+  overflow-y: auto;
+  height: 85vh;
 }
 .top h1 {
   font-size: 2.5em;
@@ -66,5 +85,11 @@ onMounted(() => {
 }
 .table {
   margin: 5%;
+}
+
+@media (orientation: portrait) {
+  .card {
+    display: none;
+  }
 }
 </style>
