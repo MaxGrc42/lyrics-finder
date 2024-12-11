@@ -9,6 +9,6 @@ export default defineEventHandler(async event => {
   console.log('client secret', clientSecret)
   const token = await getAccessToken(clientId, clientSecret)
   console.log(token)
-  const songs = await getPlaylistSongs(playlistId, token)
-  return songs
+  const playlist = await getPlaylistSongs(playlistId, token)
+  return playlist
 })

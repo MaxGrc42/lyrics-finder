@@ -23,12 +23,12 @@ function getLyrics (title, author) {
 }
 </script>
 <template>
-  <UCard class="card-select">
-    <div class="infos">
-      <p class="song-title">{{ title }}</p>
-      <p>{{ author }}</p>
-    </div>
-    <div class="action">
+  <UCard>
+    <div class="card-select">
+      <div class="infos">
+        <p class="song-title">{{ title }}</p>
+        <p>{{ author }}</p>
+      </div>
       <UButton @click="getLyrics(title, author)">Voir les paroles</UButton>
     </div>
   </UCard>
@@ -38,16 +38,12 @@ function getLyrics (title, author) {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin: 0 2vw 2vh 2vw;
 }
 .infos {
   display: flex;
   flex-direction: column;
   align-items: start;
   justify-content: start;
-  width: 100%;
-}
-.actions {
   width: 100%;
 }
 .song-title {

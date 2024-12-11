@@ -17,17 +17,20 @@ export async function getAccessToken (clientId, clientSecret) {
 
 export async function getPlaylistSongs (playlistId, accessToken) {
   const result = await fetch(
-    `https://api.spotify.com/v1/playlists/${playlistId}/tracks`,
+    `https://api.spotify.com/v1/playlists/${playlistId}`,
     {
       headers: {
         Authorization: `Bearer ${accessToken}`
       }
     }
   )
-  const { items } = await result.json()
-  return items.map(item => ({
+  const playlist = await result.json()
+  const items = playlist.tracks.items.map(item => ({
     id: item.track.id,
     title: item.track.name,
     artist: item.track.artists[0].name
   }))
+  const image = playlist.images[1].url
+  const name = playlist.name
+  return { name: name, image: image, items: items }
 }

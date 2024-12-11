@@ -20,16 +20,7 @@ function fetchLyrics (song) {
     })
 }
 
-function disableScroll () {
-  document.body.style.overflow = 'hidden'
-}
-
-function enableScroll () {
-  document.body.style.overflow = ''
-}
-
 onMounted(() => {
-  disableScroll()
   const storedSong = JSON.parse(localStorage.getItem('song'))
   if (storedSong) {
     song.value.title = storedSong.title
@@ -39,24 +30,19 @@ onMounted(() => {
     console.error('No song found in localStorage')
   }
 })
-
-onUnmounted(() => {
-  enableScroll()
-})
 </script>
 <template>
   <div class="top">
     <BackButton />
-    <h1>Paroles</h1>
-  </div>
-  <UCard class="header">
-    <p>{{ song.artist }}</p>
-    <p>-</p>
-    <p>{{ song.title }}</p>
+    <div class="title">
+      <h1>{{ song.artist }}</h1>
+      <h1>-</h1>
+      <h1>{{ song.title }}</h1>
+    </div>
     <UButton class="export" @click="showModal = true"
       >Exporter la chanson</UButton
     >
-  </UCard>
+  </div>
   <UCard class="card">
     <div v-if="loading">Chargement...</div>
     <div v-else>
@@ -88,14 +74,28 @@ onUnmounted(() => {
 <style scoped>
 .top {
   display: flex;
-  justify-content: start;
+  justify-content: space-between;
   align-items: center;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  background-color: rgba(18, 18, 18, 0.8); /* Semi-transparent background */
+  backdrop-filter: blur(10px); /* Apply blur effect */
+  -webkit-backdrop-filter: blur(10px);
+  margin-bottom: 2vh;
+  height: 15vh;
 }
+
 .top h1 {
   font-size: 2.5em;
-  margin-top: 2%;
   margin-left: 2vw;
   text-align: center;
+}
+
+.title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .header {
@@ -119,7 +119,7 @@ onUnmounted(() => {
 }
 
 .export {
-  margin-left: 2vw;
+  margin: 0 2vw 0 2vw;
 }
 
 .card {
@@ -128,8 +128,6 @@ onUnmounted(() => {
   flex-direction: column; /* Ensure content stacks vertically */
   justify-content: flex-start; /* Align content to the top */
   align-items: center;
-  max-height: 80vh; /* Adjust the height as needed */
-  overflow-y: auto; /* Enable vertical scrolling */
   width: 90%;
 }
 </style>

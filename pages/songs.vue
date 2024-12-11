@@ -2,16 +2,9 @@
 import { onMounted, ref } from 'vue'
 
 const loading = ref(false)
-
 const songs = ref([])
-
-const router = useRouter()
-
-const columns = ref([
-  { label: 'Titre', key: 'title', sortable: true },
-  { label: 'Artiste', key: 'artist', sortable: true },
-  { label: 'Action', key: 'action' }
-])
+const title = ref('')
+const image = ref('')
 
 function fetchSongs () {
   let playlistId = localStorage.getItem('playlistId')
@@ -19,77 +12,69 @@ function fetchSongs () {
   fetch('/api/songs?id=' + playlistId)
     .then(res => res.json())
     .then(data => {
-      for (const song of data) {
+      console.log('data', data)
+      title.value = data.name
+      image.value = data.image
+      for (const song of data.items) {
         songs.value.push(song)
       }
     })
 }
 
-function getLyrics (song) {
-  localStorage.setItem('song', JSON.stringify(song))
-  router.push({
-    name: 'lyrics'
-  })
-}
-
-function disableScroll () {
-  document.body.style.overflow = 'hidden'
-}
-
-function enableScroll () {
-  document.body.style.overflow = ''
-}
-
 onMounted(() => {
-  disableScroll()
   fetchSongs()
-})
-
-onUnmounted(() => {
-  enableScroll()
 })
 </script>
 <template>
   <div class="top">
     <BackButton />
-    <h1>Chansons</h1>
+    <img class="image" :src="image" alt="playlist image" />
+    <h1>{{ title }}</h1>
   </div>
-  <UCard class="card" title="Songs">
-    <UTable :rows="songs" :columns="columns">
-      <template #action-data="{ row }">
-        <!-- Button in each row -->
-        <UButton @click="getLyrics(row)">Paroles</UButton>
-      </template>
-    </UTable>
-  </UCard>
   <div class="songs" v-for="song in songs">
-    <SongDisplay :title="song.title" :author="song.artist" />
+    <div class="song-container">
+      <SongDisplay :title="song.title" :author="song.artist" />
+    </div>
   </div>
 </template>
 <style scoped>
+.image {
+  margin: 2vw;
+  width: 7%;
+  border-radius: 10px;
+}
+
 .top {
   display: flex;
   justify-content: start;
   align-items: center;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  background-color: rgba(18, 18, 18, 0.8); /* Semi-transparent background */
+  backdrop-filter: blur(10px); /* Apply blur effect */
+  -webkit-backdrop-filter: blur(10px);
+  margin-bottom: 2vh;
+  height: 15vh;
 }
+
 .card {
   margin: 1% 5% 0 5%;
   overflow-y: auto;
   height: 85vh;
 }
+
 .top h1 {
   font-size: 2.5em;
-  margin-top: 2%;
   margin-left: 2vw;
   text-align: center;
 }
+
 .table {
   margin: 5%;
 }
 
-@media (orientation: portrait) {
-  .card {
-    display: none;
-  }
+.song-container {
+  margin: 0 1vh 1vh 1vh;
 }
 </style>

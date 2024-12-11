@@ -20,7 +20,6 @@ function goBack () {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-top: 2%;
   margin-left: 2%;
   width: 10vw;
   height: 5vh;
