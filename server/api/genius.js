@@ -1,5 +1,4 @@
 import Genius from 'genius-lyrics'
-const Client = new Genius.Client('top-secret-optional-key')
 
 export default defineEventHandler(async event => {
   const { title, artist } = getQuery(event)
