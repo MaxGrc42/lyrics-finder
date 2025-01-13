@@ -30,7 +30,7 @@ export async function getPlaylistSongs (playlistId, accessToken) {
     title: item.track.name,
     artist: item.track.artists[0].name
   }))
-  const image = playlist.images[1].url
+  const image = playlist.images[0].url
   const name = playlist.name
   return { name: name, image: image, items: items }
 }
