@@ -9,7 +9,8 @@ export default defineEventHandler(async event => {
       throw new Error('Title and artist are required')
     }
 
-    const Client = new Genius.Client()
+    const config = useRuntimeConfig()
+    const Client = new Genius.Client(config.geniusApiKey)
     const request = `${title} ${artist}`
     const searches = await Client.songs.search(request)
 
