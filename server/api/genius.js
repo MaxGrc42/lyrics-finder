@@ -1,6 +1,8 @@
 import Genius from 'genius-lyrics'
 
 export default defineEventHandler(async event => {
+  const config = useRuntimeConfig()
+  const geniusApiKey = config.geniusApiKey
   try {
     const { title, artist } = getQuery(event)
     console.log('Fetching lyrics for', title, artist)
@@ -8,8 +10,7 @@ export default defineEventHandler(async event => {
     if (!title || !artist) {
       throw new Error('Title and artist are required')
     }
-
-    const config = useRuntimeConfig()
+    console.log('Genius API key:', geniusApiKey)
     const Client = new Genius.Client(config.geniusApiKey)
     const request = `${title} ${artist}`
     const searches = await Client.songs.search(request)
@@ -27,7 +28,7 @@ export default defineEventHandler(async event => {
     throw createError({
       statusCode: 500,
       statusMessage: 'Internal Server Error',
-      message: error.message
+      message: 'api key:' + geniusApiKey + error.message
     })
   }
 })
