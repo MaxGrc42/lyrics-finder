@@ -1,7 +1,4 @@
 {
-  "engines": {
-    "node": "22.x"
-  },
   "name": "nuxt-app",
   "private": true,
   "type": "module",
@@ -16,7 +13,6 @@
     "@nuxt/ui": "^2.19.2",
     "docx": "^9.1.0",
     "genius-lyrics": "^4.4.7",
-    "genius-lyrics-api": "^3.2.1",
     "jspdf": "^2.5.2",
     "nuxt": "^3.14.159",
     "vue": "latest",

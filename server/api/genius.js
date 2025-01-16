@@ -1,12 +1,32 @@
 import Genius from 'genius-lyrics'
 
 export default defineEventHandler(async event => {
-  const { title, artist } = getQuery(event)
-  console.log('Fetching lyrics for', title, artist)
-  const Client = new Genius.Client()
-  const request = ` ${title} ${artist}`
-  const searches = await Client.songs.search(request)
-  const firstSong = searches[0]
-  const lyrics = await firstSong.lyrics()
-  return lyrics
+  try {
+    const { title, artist } = getQuery(event)
+    console.log('Fetching lyrics for', title, artist)
+
+    if (!title || !artist) {
+      throw new Error('Title and artist are required')
+    }
+
+    const Client = new Genius.Client()
+    const request = `${title} ${artist}`
+    const searches = await Client.songs.search(request)
+
+    if (!searches || searches.length === 0) {
+      throw new Error('No songs found')
+    }
+
+    const firstSong = searches[0]
+    const lyrics = await firstSong.lyrics()
+
+    return lyrics
+  } catch (error) {
+    console.error('Error fetching lyrics:', error)
+    throw createError({
+      statusCode: 500,
+      statusMessage: 'Internal Server Error',
+      message: error.message
+    })
+  }
 })
