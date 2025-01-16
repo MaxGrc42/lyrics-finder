@@ -12,8 +12,8 @@
   "dependencies": {
     "@nuxt/ui": "^2.19.2",
     "docx": "^9.1.0",
-    "genius-lyrics": "^4.4.7",
     "jspdf": "^2.5.2",
+    "lyrics-finder": "^21.7.0",
     "nuxt": "^3.14.159",
     "vue": "latest",
     "vue-router": "latest"

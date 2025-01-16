@@ -9,7 +9,7 @@ const loading = ref(false)
 
 function fetchLyrics (song) {
   loading.value = true
-  fetch(`/api/genius?title=${song.title}&artist=${song.artist}`)
+  fetch(`/api/lyrics?title=${song.title}&artist=${song.artist}`)
     .then(res => res.text())
     .then(data => {
       lyrics.value = data
